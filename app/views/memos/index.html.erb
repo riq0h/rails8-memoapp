@@ -1,0 +1,39 @@
+<div class="mb-8 mt-8">
+  <div class="flex items-center gap-4">
+    <%= form_with url: memos_path, method: :get,
+        data: { turbo_frame: "search-results", controller: "search" } do |f| %>
+      <div class="relative">
+        <%= f.text_field :query,
+            class: "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            placeholder: "検索...",
+            data: { action: "input->search#submit" },
+            value: params[:query] %>
+      </div>
+    <% end %>
+    <%= link_to new_memo_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200" do %>
+      <span class="flex items-center">
+        </svg>
+        ＋ 出力開始
+      </span>
+    <% end %>
+  </div>
+</div>
+
+<div id="memos">
+  <%= turbo_frame_tag "memos" do %>
+    <div class="flex flex-col gap-4">
+      <%= render @memos %>
+      <%= render "empty_results", query: params[:query] if @memos.empty? %>
+
+      </div>
+  <% end %>
+</div>
+
+<div id="load-more" class="text-center mt-8">
+  <% if @pagy.next %>
+    <%= link_to "もっと見る",
+        pagy_url_for(@pagy, @pagy.next),
+        class: "inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200",
+        data: { turbo_method: :get } %>
+  <% end %>
+</div>

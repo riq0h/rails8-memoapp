@@ -1,0 +1,11 @@
+<%= turbo_stream.append "memos" do %>
+  <%= render @memos %>
+<% end %>
+<%= turbo_stream.update "load-more" do %>
+  <% if @pagy.next %>
+    <%= link_to "もっと見る",
+        pagy_url_for(@pagy, @pagy.next),
+        class: "inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200",
+        data: { turbo_method: :get } %>
+  <% end %>
+<% end %>

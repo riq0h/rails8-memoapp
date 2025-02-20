@@ -1,0 +1,31 @@
+<div class="space-y-6">
+  <%= form_with(model: memo,
+      class: "space-y-6",
+      data: { turbo_frame: "_top" }) do |f| %>
+    <% if memo.errors.any? %>
+      <div class="bg-red-50 p-4 rounded-md">
+        <div class="text-red-700">
+          <h2><%= pluralize(memo.errors.count, "error") %></h2>
+          <ul>
+            <% memo.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.text_area :content,
+          class: "w-full h-64 p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+          placeholder: "毎時毎行" %>
+  </div>
+
+  <div class="flex gap-4 items-center">
+      <%= f.submit memo.new_record? ? "出力" : "修正",
+          class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      <%= link_to "終了", memos_path,
+          class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+</div>
