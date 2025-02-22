@@ -160,7 +160,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.3-x86_64-linux-musl)
       racc (~> 1.4)
-    pagy (9.3.3)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -306,7 +305,6 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
-  pagy
   puma (>= 5.0)
   rails (= 8.0.1)
   rails-i18n
