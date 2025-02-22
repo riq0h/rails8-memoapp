@@ -2,13 +2,11 @@ class MemosController < ApplicationController
   before_action :set_memo, only: %i[edit update destroy]
 
   def index
-    page = (params[:page] || 0).to_i
-    @memos = Memo.search(params[:query])
-                 .order(created_at: :desc)
-                 .limit(4)
-                 .offset(page * 4)
-
-    @has_next = Memo.search(params[:query]).count > (page + 1) * 4
+    @q = Memo.ransack(params[:q])
+    @memos = @q.result(distinct: true)
+               .order(created_at: :desc)
+               .page(params[:page])
+               .per(4)
 
     respond_to do |format|
       format.html

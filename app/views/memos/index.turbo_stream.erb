@@ -1,11 +1,3 @@
 <%= turbo_stream.append "memos-container" do %>
   <%= render @memos %>
 <% end %>
-<div id="load-more" class="text-center mt-8">
-  <% if @has_next %>
-    <%= link_to "気力十分😤",
-        memos_path(page: (params[:page] || 0).to_i + 1, query: params[:query]),
-        class: "inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200",
-        data: { turbo_frame: "memos" } %>
-  <% end %>
-</div>

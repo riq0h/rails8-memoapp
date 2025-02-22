@@ -16,6 +16,9 @@ gem 'sqlite3', '>= 1.4'
 gem 'solid_cache'
 gem 'solid_queue'
 
+gem 'kaminari'
+gem 'ransack'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
 
