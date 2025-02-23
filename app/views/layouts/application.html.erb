@@ -10,9 +10,21 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= javascript_importmap_tags %>
   </head>
+
   <body class="bg-gray-50">
-    <div class="max-w-2xl mx-auto px-4">
-      <%= yield %>
+  <% if user_signed_in? %>
+    <div class="fixed top-4 right-4">
+      <%= button_to destroy_user_session_path,
+          method: :delete,
+          class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200" do %>
+        退出
+      <% end %>
     </div>
-  </body>
+  <% end %>
+
+  <div class="max-w-2xl mx-auto px-4">
+    <%= yield %>
+  </div>
+</body>
+
 </html>

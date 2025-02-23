@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'memos/index'
   get 'memos/new'
   get 'memos/edit'

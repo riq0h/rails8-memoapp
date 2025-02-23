@@ -16,6 +16,7 @@ gem 'sqlite3', '>= 1.4'
 gem 'solid_cache'
 gem 'solid_queue'
 
+gem 'devise'
 gem 'kaminari'
 gem 'ransack'
 
