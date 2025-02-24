@@ -1,4 +1,5 @@
 class Memo < ApplicationRecord
+  has_one_attached :image
   validates :content, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)

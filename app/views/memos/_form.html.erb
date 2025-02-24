@@ -19,9 +19,16 @@
       <%= f.text_area :content,
           class: "w-full h-64 p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
           placeholder: "毎時毎行" %>
-  </div>
+    </div>
+    <div class="mt-4">
+      <%= f.file_field :image,
+          class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" %>
+      <% if memo.image.attached? %>
+        <p class="mt-2 text-sm text-gray-500">現在の画像: <%= memo.image.filename %></p>
+      <% end %>
+    </div>
 
-  <div class="flex gap-4 items-center">
+    <div class="flex gap-4 items-center">
       <%= f.submit memo.new_record? ? "出力" : "修正",
           class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       <%= link_to "終了", memos_path,
