@@ -1,8 +1,9 @@
 class MemosController < ApplicationController
   before_action :set_memo, only: %i[edit update destroy]
+  before_action :authenticate_user!
 
   def index
-    @q = Memo.ransack(params[:q])
+    @q = current_user.memos.ransack(params[:q])
     @memos = @q.result(distinct: true)
                .order(created_at: :desc)
                .page(params[:page])
@@ -15,13 +16,15 @@ class MemosController < ApplicationController
   end
 
   def new
-    @memo = Memo.new
+    @memo = current_user.memos.build
   end
 
-  def edit; end
+  def edit
+    @memo = current_user.memos.find(params[:id])
+  end
 
   def create
-    @memo = Memo.new(memo_params)
+    @memo = current_user.memos.build(memo_params)
     respond_to do |format|
       if @memo.save
         format.html { redirect_to memos_path, status: :see_other }
@@ -56,7 +59,10 @@ class MemosController < ApplicationController
   private
 
   def set_memo
-    @memo = Memo.find(params[:id])
+    @memo = current_user.memos.find_by(id: params[:id])
+    return unless @memo.nil?
+
+    redirect_to memos_path, alert: 'メモが見つかりませんでした'
   end
 
   def memo_params
