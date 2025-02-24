@@ -1,11 +1,11 @@
 <div class="mb-8 mt-8">
   <div class="flex items-center gap-4">
-    <%= search_form_for @q, html: { data: { turbo_frame: "search-results", controller: "search" } } do |f| %>
+    <%= search_form_for @q, html: { data: { turbo_frame: "memos", controller: "search" } } do |f| %>
       <div class="relative">
         <%= f.text_field :content_cont,
             class: "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
             placeholder: "検索...",
-            data: { action: "input->search#submit" } %>
+            data: { action: "input->search#search" } %>
       </div>
     <% end %>
     <%= link_to new_memo_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200" do %>
@@ -25,6 +25,6 @@
   <div class="text-center mt-8">
     <%= link_to_next_page @memos, "気力十分😤",
         class: "inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200",
-        data: { turbo_frame: "memos" } %>
+        data: { turbo_frame: "memos-container" } %>
   </div>
 <% end %>

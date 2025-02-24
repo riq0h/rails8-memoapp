@@ -37,7 +37,7 @@ class MemosController < ApplicationController
     respond_to do |format|
       if @memo.update(memo_params)
         format.html { redirect_to memos_path, status: :see_other }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@memo) }
+        format.turbo_stream { redirect_to memos_path, status: :see_other }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.turbo_stream { render :edit, status: :unprocessable_entity }
