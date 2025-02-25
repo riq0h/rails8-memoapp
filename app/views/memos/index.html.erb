@@ -8,20 +8,20 @@
             data: { action: "input->search#search" } %>
       </div>
     <% end %>
-    <%= link_to new_memo_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200" do %>
-      <span class="flex items-center">
-        ＋ 出力開始
-      </span>
-    <% end %>
+      <%= link_to new_memo_path,
+    class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200",
+    data: { turbo_frame: "modal" } do %>
+  <span class="flex items-center">
+    ＋ 出力開始
+  </span>
+<% end %>
   </div>
 </div>
-
-<%= turbo_frame_tag "memos" do %>
+<%= turbo_frame_tag "memos", data: { turbo_action: :advance } do %>
   <div id="memos-container" class="flex flex-col gap-4">
     <%= render @memos %>
     <%= render "empty_results", query: @q&.content_cont if @memos.empty? %>
   </div>
-
   <div class="text-center mt-8">
     <%= link_to_next_page @memos, "気力十分😤",
         class: "inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200",

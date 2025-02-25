@@ -1,7 +1,6 @@
 <%= turbo_frame_tag dom_id(memo) do %>
-  <div data-controller="memo-card"
-       class="relative bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1">
-    <%= link_to edit_memo_path(memo), class: "h-full flex flex-col", data: { turbo_frame: "_top" } do %>
+  <div class="relative bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1">
+    <%= link_to edit_memo_path(memo), class: "h-full flex flex-col", data: { turbo_frame: "modal" } do %>
       <h2 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">
         <%= memo.content.lines.first.try(:strip) || "無題" %>
       </h2>
@@ -19,7 +18,6 @@
         </span>
       </div>
     <% end %>
-
     <div class="absolute top-4 right-4">
       <%= button_to memo_path(memo),
           method: :delete,
